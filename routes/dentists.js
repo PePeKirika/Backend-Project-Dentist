@@ -1,5 +1,5 @@
 const express = require('express') ;
-const {getHospitals ,getHospital ,createHospital ,updateHospital ,deleteHospital , getVacCenters} = require('../controllers/hospitals');
+const {getHospitals ,getHospital ,createHospital ,updateHospital ,deleteHospital , } = require('../controllers/dentists');
 const router = express.Router();
 
 //Include other resource routers 
@@ -12,7 +12,6 @@ const swaggerJSDoc = require('swagger-jsdoc');
 router.use('/:hospitalId/appointments/' , AppointmentRounter) ;
 
 router.route('/').get(getHospitals).post(protect , authorize('admin'), createHospital) ;
-router.route('/vacCenters').get(getVacCenters) ;
 router.route('/:id').get( getHospital).put(protect , authorize('admin'), updateHospital).delete(protect, authorize('admin') ,deleteHospital);
 
 module.exports=router ;
