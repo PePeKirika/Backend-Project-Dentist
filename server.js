@@ -12,10 +12,8 @@ const hpp = require('hpp');
 const cors = require('cors') ;
 
 
-
-
 //Route files
-const hospitals = require('./routes/hospitals');
+const hospitals = require('./routes/dentists');
 const auth = require('./routes/auth');
 const appointments = require('./routes/appointments') ;
 
