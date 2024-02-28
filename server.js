@@ -13,7 +13,7 @@ const cors = require('cors') ;
 
 
 //Route files
-const hospitals = require('./routes/dentists');
+const dentists = require('./routes/dentists');
 const auth = require('./routes/auth');
 const appointments = require('./routes/appointments') ;
 
@@ -68,7 +68,7 @@ app.use(cors());
 
 
 //Mount reuters
-app.use('/api/v1/hospitals' , hospitals);
+app.use('/api/v1/dentists' , dentists);
 app.use('/api/v1/auth' , auth);
 app.use('/api/v1/appointments' , appointments);
 

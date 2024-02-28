@@ -1,11 +1,11 @@
-const Hospital = require('../models/Dentist');
+const Dentist = require('../models/Dentist');
 
 
 
-//@desc  Get all hospitals
-//@route GeT /api/v1/hospitals
+//@desc  Get all dentists
+//@route GeT /api/v1/dentists
 //@access Public
-exports.getHospitals  = async (req , res , next)=>{
+exports.getDentists  = async (req , res , next)=>{
     let query ; 
     //copy req.query
     const reqQuery = {...req.query};
@@ -21,7 +21,7 @@ exports.getHospitals  = async (req , res , next)=>{
     let queryStr = JSON.stringify(reqQuery) ;
     queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g , match=> `$${match}`);
 
-    query = Hospital.find(JSON.parse(queryStr)).populate('appointments');
+    query = Dentist.find(JSON.parse(queryStr)).populate('appointments');
 
     //Select Fields
     if(req.query.select){
@@ -45,12 +45,12 @@ exports.getHospitals  = async (req , res , next)=>{
    
 
     try{
-        const total = await Hospital.countDocuments() ;
+        const total = await Dentist.countDocuments() ;
 
         query = query.skip(startIndex).limit(limit) ;
 
         //Excuting query
-        const hospitals  = await query;
+        const dentists  = await query;
         // console.log(req.query) ;
         
         //Pagination result
@@ -64,7 +64,7 @@ exports.getHospitals  = async (req , res , next)=>{
         }
 
     
-    res.status(200).json({success:true,count: hospitals.length , pagination, data:hospitals});
+    res.status(200).json({success:true,count: dentists.length , pagination, data:dentists});
     }
     catch(err){
         res.status(400).json({success: false}) ;
@@ -72,70 +72,70 @@ exports.getHospitals  = async (req , res , next)=>{
 
 };
 
-//@desc  Get single hospital
-//@route GeT /api/v1/hospital/:id
+//@desc  Get single dentist
+//@route GeT /api/v1/dentist/:id
 //@access Public
 
-exports.getHospital =async( req , res , next)=>{
+exports.getDentist =async( req , res , next)=>{
     try{
-        const hospital  = await Hospital.findById(req.params.id);
+        const dentist  = await Dentist.findById(req.params.id);
     
-    if(!hospital){
+    if(!dentist){
         return res.status(400).json({success: false}) ;
     }
 
-    res.status(200).json({success: true ,data:hospital});}
+    res.status(200).json({success: true ,data:dentist});}
     catch(err){
         res.status(400).json({success: false}) ;
     }
 };
 
-//@desc  Creaet a  hospital
-//@route Post /api/v1/hospitals
+//@desc  Creaet a  Dentist
+//@route Post /api/v1/dentists
 //@access Private
 
-exports.createHospital = async (req , res , next)=>{
-    const hospital = await Hospital.create(req.body);
-    res.status(200).json({success:true, data:hospital});
+exports.createDentist = async (req , res , next)=>{
+    const dentist = await Dentist.create(req.body);
+    res.status(200).json({success:true, data:dentist});
 };
 
 
-//@desc  update single hospital
-//@route put /api/v1/hospital/:id
+//@desc  update single dentist
+//@route put /api/v1/dentist/:id
 //@access Private
 
-exports.updateHospital =async (req , res , next)=>{
+exports.updateDentist =async (req , res , next)=>{
     try{
-        const hospital  = await Hospital.findByIdAndUpdate(req.params.id , req.body ,{
+        const dentist  = await Dentist.findByIdAndUpdate(req.params.id , req.body ,{
             new: true ,
             runValidators: true
 
         });
     
-    if(!hospital){
+    if(!dentist){
         return res.status(400).json({success: false}) ;
     }
 
-    res.status(200).json({success: true ,data:hospital});}
+    res.status(200).json({success: true ,data:dentist});}
     catch(err){
         res.status(400).json({success: false}) ;
     }
 };
 
 
-//@desc  delete single hospital
-//@route delete /api/v1/hospital/:id
+//@desc  delete single dentist
+//@route delete /api/v1/dentist/:id
 //@access Private
 
-exports.deleteHospital =async (req , res , next)=>{
+exports.deleteDentist =async (req , res , next)=>{
     try{
-        const hospital  = await Hospital.findById(req.params.id);
+        const dentist  = await Dentist.findById(req.params.id);
     
-    if(!hospital){
+    if(!dentist){
         return res.status(400).json({success: false}) ;
     }
 
-    await hospital.deleteOne() ;
+    await dentist.deleteOne() ;
     res.status(200).json({success: true ,data:{}});
 }
     catch(err){
