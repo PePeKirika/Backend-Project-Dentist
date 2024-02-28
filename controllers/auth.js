@@ -1,7 +1,7 @@
 const { json } = require("express");
 const User = require("../models/User");
 
-//test
+//Test Branch
 
 //@dese   Register user
 //@route    POST  /api/v1/suth/register
@@ -66,12 +66,10 @@ exports.login = async (req, res, next) => {
     // res.status(200).json({success:true , token});
     sendTokenResponse(user, 200, res);
   } catch (err) {
-    return res
-      .status(401)
-      .json({
-        success: false,
-        msg: "Connot convert email or password to string",
-      });
+    return res.status(401).json({
+      success: false,
+      msg: "Connot convert email or password to string",
+    });
   }
 };
 
