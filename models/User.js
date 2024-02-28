@@ -23,7 +23,12 @@ const UserSchema=  new mongoose.Schema({
         type:String, 
         required:[true,'Please add a password'] , 
         minlength:6, select:false 
-    }, 
+    },
+    tel:{
+        type:String,
+        required:[true , 'Please add a telephone number'],
+        match:[/^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/],
+    },
     resetPasswordToken : String, 
     resetPasswordExpire : Date,
     createdAt:{ 

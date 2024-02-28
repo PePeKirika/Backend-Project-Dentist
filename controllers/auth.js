@@ -1,14 +1,13 @@
 const { json } = require("express");
 const User = require("../models/User");
 
-//Test Branch
 
 //@dese   Register user
 //@route    POST  /api/v1/suth/register
 //@ts-check     Public
 exports.register = async (req, res, next) => {
   try {
-    const { name, email, password, role } = req.body;
+    const { name, email, password, role ,tel } = req.body;
 
     //Create User
     const user = await User.create({
@@ -16,6 +15,7 @@ exports.register = async (req, res, next) => {
       email,
       password,
       role,
+      tel
     });
 
     // const token =user.getSignedJwtToken();
