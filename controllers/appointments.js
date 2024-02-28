@@ -10,7 +10,7 @@ exports.getAppointments = async (req, res, next) => {
   if (req.user.role !== "admin") {
     query = Appointment.find({ user: req.user.id }).populate({
       path: "dentist",
-      select: "name yearOfExperience areaOfExpertise",
+      select: "name yearsOfExperience areaOfExpertise",
     });
   } else {
     //If you are an admin you can see all
@@ -20,12 +20,12 @@ exports.getAppointments = async (req, res, next) => {
         dentist: req.params.dentistID,
       }).populate({
         path: "dentist",
-        select: "name yearOfExperience areaOfExpertise",
+        select: "name yearsOfExperience areaOfExpertise",
       });
     } else {
       query = Appointment.find().populate({
         path: "dentist",
-        select: "name yearOfExperience areaOfExpertise",
+        select: "name yearsOfExperience areaOfExpertise",
       });
     }
   }
@@ -51,7 +51,7 @@ exports.getAppointment = async (req, res, next) => {
   try {
     const appointment = await Appointment.findById(req.params.id).populate({
       path: "dentist",
-      select: "name yearOfExperience areaOfExpertise",
+      select: "name yearsOfExperience areaOfExpertise",
     });
 
     if (!appointment) {
