@@ -1,0 +1,57 @@
+@startuml Dentist System Use Case Diagram
+left to right direction
+actor "User" as user
+actor "Admin" as admin
+rectangle "Dentist System" as DentistSystem {    
+    usecase "Register" as register
+    usecase "Log In" as login
+    usecase "Log In (Admin)" as adminLogin
+    usecase "Log Out" as logout
+    usecase "Manage\nDentist" as manageDentist
+    usecase "View\nDentist" as viewDentist
+    usecase "Delete\nDentist" as deleteDentist
+    usecase "Create\nAppointment" as createAppt
+    usecase "Manage\nAppointment" as manageAppt
+    usecase "View\nAppointment" as viewAppt
+    usecase "Delete\nAppointment" as deleteAppt
+}
+
+' user -- register
+' user -- login
+' user -- logout
+' user -- createAppt
+' user -- manageAppt
+' user -- viewAppt
+' user -- deleteAppt
+' user -- viewDentist
+
+user -- register
+user -- login
+register -- login
+login -- logout
+login -- createAppt
+login -- manageAppt
+login -- viewAppt
+login -- deleteAppt
+login -- viewDentist
+
+' admin -- createAppt
+' admin -- manageAppt
+' admin -- deleteAppt
+' admin -- viewAppt
+
+' admin -- manageDentist
+' admin -- viewDentist
+' admin -- deleteDentist
+
+admin -- adminLogin
+adminLogin -- createAppt
+adminLogin -- manageAppt
+adminLogin -- deleteAppt
+adminLogin -- viewAppt
+
+adminLogin -- manageDentist
+adminLogin -- viewDentist
+adminLogin -- deleteDentist
+
+@enduml
