@@ -1,8 +1,8 @@
-@startuml ADMIN DELETE APPOINTMENT (DELETE)
+@startuml USER VIEW APPOINTMENT (GET ONE)
 
 header Dentist Sequence Diagram
 footer Page %page% of %lastpage%
-title "ADMIN DELETE APPOINTMENT (DELETE)"
+title "USER VIEW APPOINTMENT (GET ONE)"
 
 participant "Client" as client
 participant "<<javaScript>>\n:server" as server
@@ -11,12 +11,17 @@ participant "<<controllers>>\n:appointments" as controllersAppointments
 participant "<<model>>\n:Appointment" as modelAppointment
 database "<<MongoDB>>\n:appointments" as AppointmentsDatabase
 
-client->server ++:req.delete('/api/v1/appointments/{appointmentId}')
+client->server ++:req.get('/api/v1/appointments')
 server->routerAppointments ++:app.use('/api/v1/appointments', appointments)
-routerAppointments -> controllersAppointments ++:deleteAppointment()
-controllersAppointments->modelAppointment ++:delete(req.params.id)
+routerAppointments -> controllersAppointments ++:getAppointment()
+alt successful case
+    controllersAppointments->modelAppointment ++:find({user: req.user.id})
+else appointment.user.toString() !== req.user.id && req.user.role !== "admin"
+    controllersAppointments->client --:response
+end
 modelAppointment ->AppointmentsDatabase ++: AppointmentSchema
+AppointmentsDatabase --> modelAppointment --: appointment
+controllersAppointments <-- modelAppointment --:appointment
 controllersAppointments->client --:response
-
 
 @enduml
