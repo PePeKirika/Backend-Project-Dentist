@@ -27,14 +27,23 @@
 									"pm.test(\"There are some dentists!!\", () => {\r",
 									"    pm.expect(response.count).to.be.above(0);\r",
 									"});\r",
-									"\r",
-									"postman.setNextRequest(\"Add Appointment\");"
+									""
 								],
 								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -94,14 +103,23 @@
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
-									"\r",
-									"postman.setNextRequest(\"Update Single Dentist\");"
+									""
 								],
 								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -140,8 +158,7 @@
 									"const new_dentist_id = response.data.id;\r",
 									"\r",
 									"pm.collectionVariables.set(\"new_dentist_ID\",new_dentist_id)\r",
-									"\r",
-									"postman.setNextRequest(\"Get Single Dentist\");"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -200,8 +217,7 @@
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
-									"\r",
-									"postman.setNextRequest(\"Delete Single Dentist\");"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -267,8 +283,7 @@
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
-									"\r",
-									"postman.setNextRequest(null);"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -692,9 +707,7 @@
 									"const response = pm.response.json();\r",
 									"const new_app_id = response.data._id;\r",
 									"\r",
-									"pm.collectionVariables.set(\"new_apppointment_ID\",new_app_id)\r",
-									"\r",
-									"postman.setNextRequest(\"Update Appointment\");"
+									"pm.collectionVariables.set(\"new_apppointment_ID\",new_app_id)"
 								],
 								"type": "text/javascript"
 							}
@@ -756,8 +769,7 @@
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
-									"\r",
-									"postman.setNextRequest(\"Delete Appointment\");"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -823,8 +835,7 @@
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
-									"\r",
-									"postman.setNextRequest(\"Logout\");"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -1005,6 +1016,16 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -1452,8 +1473,7 @@
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
-									"\r",
-									"postman.setNextRequest(\"Get All Appointments\");"
+									""
 								],
 								"type": "text/javascript"
 							}
