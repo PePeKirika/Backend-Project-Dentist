@@ -1,8 +1,8 @@
-@startuml ADMIN UPDATE APPOINTMENT (UPDATE ONE)
+@startuml ADMIN UPDATE APPOINTMENT (UPDATE)
 
 header Dentist Sequence Diagram
 footer Page %page% of %lastpage%
-title "ADMIN UPDATE APPOINTMENT (UPDATE ONE)"
+title "ADMIN UPDATE APPOINTMENT (UPDATE)"
 
 participant "Client" as client
 participant "<<javaScript>>\n:server" as server
