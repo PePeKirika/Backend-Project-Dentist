@@ -116,7 +116,7 @@ exports.addAppointment = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      data: appointment,
+      data: appointment
     });
   } catch (error) {
     console.log(error);
