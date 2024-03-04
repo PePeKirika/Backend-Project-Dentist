@@ -21,7 +21,12 @@ exports.getDentists  = async (req , res , next)=>{
     let queryStr = JSON.stringify(reqQuery) ;
     queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g , match=> `$${match}`);
 
-    query = Dentist.find(JSON.parse(queryStr)).populate('appointments');
+    if(req.user.role == "admin"){
+        query = Dentist.find(JSON.parse(queryStr)).populate('appointments');
+    }
+    else{
+        query = Dentist.find(JSON.parse(queryStr)) ;
+    }
 
     //Select Fields
     if(req.query.select){
