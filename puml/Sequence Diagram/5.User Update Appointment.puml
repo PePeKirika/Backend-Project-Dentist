@@ -1,23 +1,29 @@
-@startuml Manage Hospital (GET ALL)
+@startuml USER UPDATE APPOINTMENT (UPDATE)
 
-header Sameple VacQ Sequence Diagram
+header Dentist Sequence Diagram
 footer Page %page% of %lastpage%
-title "Manage Hospital (GET ALL)"
+title "USER UPDATE APPOINTMENT (UPDATE)"
 
 participant "Client" as client
 participant "<<javaScript>>\n:server" as server
-participant "<<router>>\n:hospitals" as routerHospitals
-participant "<<controllers>>\n:hospitals" as controllersHospitals
-participant "<<model>>\n:Hospital" as modelHospital
-database "<<MongoDB>>\n:hospitals" as HospitalsDatabase
+participant "<<router>>\n:appointments" as routerAppointments
+participant "<<controllers>>\n:appointments" as controllersAppointments
+participant "<<model>>\n:Appointment" as modelAppointment
+database "<<MongoDB>>\n:appointments" as AppointmentsDatabase
 
-client->server ++:req.get('/api/v1/hospitals')
-server->routerHospitals ++:app.use('/api/v1/hospitals',hospitals)
-routerHospitals -> controllersHospitals ++:getHospitals()
-controllersHospitals->modelHospital ++:get(req.body)
-modelHospital ->HospitalsDatabase ++: HospitalSchema
-HospitalsDatabase --> modelHospital --: hospital
-controllersHospitals <-- modelHospital --:hospital
-controllersHospitals->client --:response
+client->server ++:req.put('/api/v1/appointments')
+server->routerAppointments ++:app.use('/api/v1/appointments', appointments)
+routerAppointments -> controllersAppointments ++:updateAppointment()
+
+alt successful case
+    controllersAppointments->modelAppointment ++:findByIdAndUpdate(req.params.id, req.body)
+else appointment.user.toString() !== req.user.id && req.user.role !== "admin"
+    controllersAppointments->client --:response
+end
+
+modelAppointment ->AppointmentsDatabase ++: AppointmentSchema
+AppointmentsDatabase --> modelAppointment --: appointment
+controllersAppointments <-- modelAppointment --:appointment
+controllersAppointments->client --:response
 
 @enduml
