@@ -3,7 +3,7 @@ import BookingList from "@/components/BookingList"
 
 export default function MyBooking() {
     return (
-        <main>
+        <main className="mt-10">
             <BookingList/>
         </main>
     )

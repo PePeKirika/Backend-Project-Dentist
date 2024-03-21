@@ -11,7 +11,7 @@ export default function Banner() {
   const router = useRouter()
 
   const { data: session } = useSession()
-  //console.log(session?.user?.token)
+  console.log(session?.user?.email)
   
   return (
     <div className="block p-5 m-0 w-screen h-[80vh] relative" onClick={()=>{setIndex(index+1) }}>
@@ -35,7 +35,8 @@ export default function Banner() {
             session? <div className='z-30 absolute top-5 right-10 font-semibold text-cyan-800 text-xl'>Welcome {session.user?.name}</div> : null
         }
 
-        <button className='bg-sky-600 text-white border border-white font-semibold py-2 px-2 m-2 mx-6 rounded z-30 absolute bottom-0 right-0 hover:bg-white hover:text-sky-600 hover:border-sky-600'
+        <button className='bg-blue-500 text-white font-semibold py-2 px-2 m-2 mx-6 rounded z-30 absolute bottom-0 right-0 
+        hover:bg-white hover:text-blue-500 '
             onClick={(e)=>{e.stopPropagation(); router.push('/hospital');}}>
             Select Hospital
         </button>
