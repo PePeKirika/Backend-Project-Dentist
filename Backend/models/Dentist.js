@@ -14,7 +14,12 @@ const DentistSchema = new mongoose.Schema({
     areaOfExpertise:{
         type: String,
         required:[true, 'Please add an area of expertise']
-    }
+    },
+    picture: {
+        type: String,
+        default: '/img/no-photo.png',
+        required:[true, "Please add a link to Dentist's picture"]   
+    },
 } ,
 
 {
