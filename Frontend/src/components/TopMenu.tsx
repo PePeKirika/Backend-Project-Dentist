@@ -11,14 +11,16 @@ export default async function TopMenu() {
   const profile = session ? await getUserProfile(session.user.token) : null
 
   return (
-    <div className="h-[64px] top-0 left-0 right-0 z-30 fixed flex flex-row-reverse 
+    <div className="h-[64px] top-0 left-0 right-0 z-30 fixed flex flex-row
     border-y-gray-300 bg-black shadow-lg text-[20px]"
     style={{ backgroundColor: 'rgb(0, 141, 218)' }}>
-        <Image src={'/img/logo.png'} className="h-[100%] w-auto p-1" alt='logo' width={0} height={0} sizes='100vh'/>
+        <Link href=".">
+          <Image src={'/img/logo.png'} className="h-[100%] w-auto p-1" alt='logo' width={0} height={0} sizes='100vh'/>
+        </Link>
         <TopMenuItem title='Bookings' pageRef='/booking'/>
-        <div className='flex flex-row absolute left-0 h-full ml-5 space-x-5'>
+        <div className='flex flex-row-reverse absolute right-0 h-full ml-5 space-x-5'>
         {
-          session ? <div className='flex flex-row space-x-5'>
+          session ? <div className='flex flex-row-reverse space-x-5'>
               <Link href="/api/auth/signout" className='my-auto'>
             <div className="px-2 text-white">Sign-Out of {profile.data.name}</div>
           </Link> 

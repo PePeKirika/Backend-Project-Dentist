@@ -37,8 +37,8 @@ export default function Banner() {
 
         <button className='bg-blue-500 text-white font-semibold py-2 px-2 m-2 mx-6 rounded z-30 absolute bottom-0 right-0 
         hover:bg-white hover:text-blue-500 '
-            onClick={(e)=>{e.stopPropagation(); router.push('/hospital');}}>
-            Select Hospital
+            onClick={(e)=>{e.stopPropagation(); router.push('/dentist');}}>
+            Select Dentist
         </button>
     </div>
   )
