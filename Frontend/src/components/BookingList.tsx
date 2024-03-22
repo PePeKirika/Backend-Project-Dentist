@@ -27,10 +27,9 @@ export default function BookingList() {
             { bookItems.length > 0 ? (
                 bookItems.map((bookingItem) => (
                     <div className="bg-slate-400 rounded-lg mx-5 my-2 px-10 py-5 text-black space-y-5" key={bookingItem.user}>
-                        {/* <div className="text-2xl">{bookingItem.name} {bookingItem.surname}</div>
-                        <div className="text-xl">Citizen ID: {bookingItem.id}</div>
-                        <div className="text-xl">At {bookingItem.hospital}</div>
-                        <div className="text-xl">Date: {bookingItem.bookDate}</div> */}
+                        <div className="text-2xl">{bookingItem.userName}</div>
+                        <div className="text-xl">Dentist: {bookingItem.dentist}</div>
+                        <div className="text-xl">Date: {bookingItem.appDate}</div>
                         <button className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 shadow-sm text-white" name="Book Vaccine" 
                         onClick={() => dispatch(removeBooking(bookingItem.user))}>
                             Cancel Booking

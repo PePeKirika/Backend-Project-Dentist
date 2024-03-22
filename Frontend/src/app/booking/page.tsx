@@ -13,6 +13,7 @@ import { addBooking } from "@/redux/features/bookSlice";
 export default function Booking() {
 
     const [userID, setUserID] = useState<string>("")
+    const [userName, setUserName] = useState<string>("")
     const [bookDate, setBookDate] = useState<Dayjs|null>(null)
     const [bookDentist, setBookDentist] = useState<string>("")
 
@@ -24,6 +25,7 @@ export default function Booking() {
             if (!session || !session.user.token) return null
             const profile = await getUserProfile(session.user.token)
             setUserID(profile.data._id)
+            setUserName(profile.data.name)
         }
         fetchData()
     }, [])
@@ -33,6 +35,7 @@ export default function Booking() {
             const item:BookingItem = {
                 appDate : dayjs(bookDate).format('YYYY/MM/DD'),
                 user : userID,
+                userName : userName,
                 dentist : bookDentist,
                 createAt : dayjs().format('YYYY/MM/DD')
             }
