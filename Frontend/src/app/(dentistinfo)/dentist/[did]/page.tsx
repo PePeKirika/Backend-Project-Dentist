@@ -3,7 +3,6 @@ import getDentist from "@/libs/getDentist";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Link from "next/link";
-import Button from "@/components/SelectDentist";
 
 export default async function DentistDetailPage({
   params,
