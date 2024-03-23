@@ -1,16 +1,17 @@
 
-export default async function userLogIn(userEmail:string, userPassword:string) {
+export default async function addAppointment(dentistID:string, appDate:string , token:string) {
 
-    const response = await fetch("https://project-dentist-backend.vercel.app/api/v1/auth/login", {
+    const response = await fetch(`https://project-dentist-backend.vercel.app/api/v1/dentists/${dentistID}/appointments`, {
         method: 'POST',
         headers: {
+            'authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({email: userEmail, password: userPassword})
+        body: JSON.stringify({appDate: appDate})
     })
 
     if (!response.ok) {
-        throw new Error("Failed to login")
+        throw new Error("Failed to add appointment")
     }
 
     return await response.json()
