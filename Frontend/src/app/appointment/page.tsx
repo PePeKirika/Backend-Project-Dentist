@@ -43,8 +43,6 @@ export default function Appointment() {
         }
     }
 
-    if (!userID || !userName) return (<p>Loading...</p>)
-
     return (
         <main className="w-[100%] flex flex-col items-center space-y-4 mt-20">
 

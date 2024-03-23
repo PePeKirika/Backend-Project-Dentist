@@ -1,4 +1,4 @@
-export default function BookingLayout({children}:{children:React.ReactNode}) {
+export default function AppointmentLayout({children}:{children:React.ReactNode}) {
     return (
         <div>
             {children}
