@@ -12,8 +12,8 @@ export default async function TopMenu() {
 
   return (
     <div className="h-[64px] top-0 left-0 right-0 z-30 fixed flex flex-row
-    border-y-gray-300 bg-black shadow-lg text-[20px]"
-    style={{ backgroundColor: 'rgb(0, 141, 218)' }}>
+    border-y-gray-300 bg-black shadow-lg text-[20px] font-sans"
+    style={{ backgroundColor: 'rgb(65, 201, 226)' }}>
         <Link href=".">
           <Image src={'/img/logo.png'} className="h-[100%] w-auto p-1" alt='logo' width={0} height={0} sizes='100vh'/>
         </Link>
