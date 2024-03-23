@@ -21,7 +21,7 @@ export default function DateReserve({onDateChange, onHospitalChange} : {onDateCh
             </LocalizationProvider>
 
             <Select variant="standard" name="location" id="hospital" value={hospital} className="h2-[2em] w-[200px]" onChange={(e) => {setHospital(e.target.value); onHospitalChange(e.target.value)}}>
-                <MenuItem value="Chulalongkorn Hospital">Chulalongkorn Hospital</MenuItem>
+                <MenuItem value="65fc87aec9158cef4a0e1725">Chulalongkorn Hospital</MenuItem>
                 <MenuItem value="Rajavithi Hospital">Rajavithi Hospital</MenuItem>
                 <MenuItem value="Thammasat University Hospital">Thammasat University Hospital</MenuItem>
             </Select>

@@ -1,5 +1,6 @@
 'use client'
 import DateReserve from "@/components/DateReserve";
+import Link from "next/link";
 import { TextField } from "@mui/material";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
@@ -8,41 +9,30 @@ import { useState,useEffect } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
-import { addAppointment } from "@/redux/features/appointmentSlice";
+import { useSearchParams } from "next/navigation";
+import { useSession } from "next-auth/react";
+import addAppointment from "@/libs/addAppointment";
 
-export default function Appointment() {
+export default function AppointmentMaking () {
+    const { data: session } = useSession()
 
-    const [userID, setUserID] = useState<string>("")
-    const [userName, setUserName] = useState<string>("")
+    const token = session?.user.token
+    if (!token) return null
+
     const [appointmentDate, setAppointmentDate] = useState<Dayjs|null>(null)
     const [appointmentDentist, setAppointmentDentist] = useState<string>("")
 
-    const dispatch = useDispatch<AppDispatch>()
+    let appDate = dayjs(appointmentDate).format('YYYY/MM/DD')
 
-    useEffect(()=>{
-        const fetchData = async () => {
-            const session = await getServerSession(authOptions)
-            if (!session || !session.user.token) return null
-            const profile = await getUserProfile(session.user.token)
-            setUserID(profile.data._id)
-            setUserName(profile.data.name)
-        }
-        fetchData()
-    }, [])
-
-    const makeAppointment = () => {
-        if (userID && appointmentDate && appointmentDentist) {
-            const item:AppointmentItem = {
-                appDate : dayjs(appointmentDate).format('YYYY/MM/DD'),
-                user : userID,
-                userName : userName,
-                dentist : appointmentDentist,
-                createAt : dayjs().format('YYYY/MM/DD')
-            }
-            dispatch(addAppointment(item))
+    const makingAppointment = async () => {
+        const appointment = await addAppointment(appointmentDentist,appDate,token)
+        if (appointment) {
+            alert('Appointment booked successfully')
+        } else {
+            alert('Appointment booking failed')
         }
     }
-
+    
     return (
         <main className="w-[100%] flex flex-col items-center space-y-4 mt-20">
 
@@ -55,8 +45,12 @@ export default function Appointment() {
                 <DateReserve onDateChange={(value:Dayjs)=>{setAppointmentDate(value)}} onHospitalChange={(value:string)=>setAppointmentDentist(value)}/>
             </div>
             
-            <button className="block rounded-md bg-[#008DDA] hover:bg-indigo-500 px-5 py-4 shadow-sm text-xl text-bold" name="Book Dentist"
-            onClick={makeAppointment}>Book Dentist</button>
+            
+                <button className="block rounded-md bg-[#008DDA] hover:bg-indigo-500 px-5 py-4 shadow-sm text-xl text-bold" name="Add Appointment"
+                onClick={makingAppointment}>
+                    Add Appointment
+                </button>
+
         </main>
     );
 }
