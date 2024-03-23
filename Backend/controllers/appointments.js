@@ -101,6 +101,7 @@ exports.addAppointment = async (req, res, next) => {
 
     //add user Id to req.body
     req.body.user = req.user.id;
+    req.body.userName = req.user.name;
     //Check for existed appointment
     const existedAppointments = await Appointment.find({ user: req.user.id });
 

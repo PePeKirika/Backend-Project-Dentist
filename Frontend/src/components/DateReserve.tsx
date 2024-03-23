@@ -12,9 +12,9 @@ export default function DateReserve({onDateChange, onHospitalChange} : {onDateCh
     const [hospital, setHospital] = useState<string>("")
 
     return (
-        <div className="bg-slate-400 rounded-lg space-x-5 space-y-2 w-[100%] px-10 py-5 flex flex-row justify-center">
+        <div className="rounded-lg space-x-5 space-y-2 w-[100%] px-10 py-5 flex flex-row justify-center">
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker className="bg-gray-300"
+                <DatePicker className=""
                 value={reserveDate}
                 onChange={(value) => {setReserveDate(value); onDateChange(value)}}
                 />

@@ -1,27 +1,22 @@
-interface HospitalItem {
+  interface DentistItem {
     _id: string,
     name: string,
-    address: string,
-    district: string,
-    province: string,
-    postalcode: string,
-    tel: string,
-    picture: string,
-    __v: number,
-    id: string
+    yearsOfExperience:string,
+    areaOfExpertise:string,
+    picture: string, 
   }
-  
-  interface HospitalJson {
+
+  interface DentistJson {
     success: boolean,
     count: number,
     pagination: Object,
-    data: HospitalItem[]
+    data: DentistItem[]
   }
 
-  interface BookingItem {
-    name : string;
-    surname : string;
-    id : string;
-    hospital : string;
-    bookDate : string;
+  interface AppointmentItem {
+    appDate : string;
+    user : string;
+    userName :string;
+    dentist : string;
+    createAt : string;
   }
