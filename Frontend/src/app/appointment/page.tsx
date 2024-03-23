@@ -8,14 +8,14 @@ import { useState,useEffect } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
-import { addBooking } from "@/redux/features/bookSlice";
+import { addAppointment } from "@/redux/features/appointmentSlice";
 
-export default function Booking() {
+export default function Appointment() {
 
     const [userID, setUserID] = useState<string>("")
     const [userName, setUserName] = useState<string>("")
-    const [bookDate, setBookDate] = useState<Dayjs|null>(null)
-    const [bookDentist, setBookDentist] = useState<string>("")
+    const [appointmentDate, setBookDate] = useState<Dayjs|null>(null)
+    const [appointmentDentist, setBookDentist] = useState<string>("")
 
     const dispatch = useDispatch<AppDispatch>()
 
@@ -31,17 +31,19 @@ export default function Booking() {
     }, [])
 
     const makeBooking = () => {
-        if (userID && bookDate && bookDentist) {
-            const item:BookingItem = {
-                appDate : dayjs(bookDate).format('YYYY/MM/DD'),
+        if (userID && appointmentDate && appointmentDentist) {
+            const item:AppointmentItem = {
+                appDate : dayjs(appointmentDate).format('YYYY/MM/DD'),
                 user : userID,
                 userName : userName,
-                dentist : bookDentist,
+                dentist : appointmentDentist,
                 createAt : dayjs().format('YYYY/MM/DD')
             }
-            dispatch(addBooking(item))
+            dispatch(addAppointment(item))
         }
     }
+
+    if (!userID || !userName) return (<p>Loading...</p>)
 
     return (
         <main className="w-[100%] flex flex-col items-center space-y-4 mt-20">

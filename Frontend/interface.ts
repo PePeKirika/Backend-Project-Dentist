@@ -13,7 +13,7 @@
     data: DentistItem[]
   }
 
-  interface BookingItem {
+  interface AppointmentItem {
     appDate : string;
     user : string;
     userName :string;
