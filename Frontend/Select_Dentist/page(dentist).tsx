@@ -43,9 +43,11 @@ export default async function DentistDetailPage({
           <div className=" mx-5 ">
             Area Of Expertise: {dentistDetail.data.areaOfExpertise}{" "}
           </div>
-          <Link href={`/appointment?dentistid=${dentistDetail.data.id}&dentistname=${dentistDetail.data.name}`}>
-            <button className="rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 shadow-sm text-white h-fit mb-0"> Select</button>
-          </Link>
+          <Button
+            Text="Select"
+            url="/appointment"
+            prop={dentistDetail.data.name}
+          />
         </div>
       </div>
     </main>

@@ -20,18 +20,22 @@ export default function AppointmentMaking() {
   if (!token) return null;
 
   const [appointmentDate, setAppointmentDate] = useState<Dayjs | null>(null);
+  const [appointmentDentist, setAppointmentDentist] = useState<string>("");
 
   let appDate = dayjs(appointmentDate).format("YYYY/MM/DD");
 
+  const router = useRouter();
+
   const searchParams = useSearchParams();
 
-  const dentistID = searchParams.get("dentistid");
-  const dentist = searchParams.get("dentistname");
-  if (!dentistID || !dentist) return null;
+  const dentist = searchParams.get("Dentist");
 
   const makingAppointment = async () => {
+    if (dentist) {
+      setAppointmentDentist(dentist);
+    }
     const appointment = await addAppointment(
-      dentistID,
+      appointmentDentist,
       appDate,
       token
     );

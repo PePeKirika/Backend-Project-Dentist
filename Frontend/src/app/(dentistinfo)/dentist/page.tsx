@@ -1,4 +1,3 @@
-import CardPanel from "@/components/CardPanel";
 import HospitalCatalog from "@/components/HospitalCatalog";
 import { Suspense } from "react";
 import { LinearProgress } from "@mui/material";
