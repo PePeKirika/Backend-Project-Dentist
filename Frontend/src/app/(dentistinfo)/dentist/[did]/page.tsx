@@ -9,11 +9,8 @@ export default async function DentistDetailPage({
 }: {
   params: { did: string };
 }) {
-  const session = await getServerSession(authOptions);
 
-  if (!session || !session.user.token) return null;
-
-  const dentistDetail = await getDentist(params.did, session.user.token);
+  const dentistDetail = await getDentist(params.did);
 
   // mock
   // const mockHospital = new Map()

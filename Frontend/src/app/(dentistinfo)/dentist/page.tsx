@@ -6,11 +6,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export default async function Dentist() {
-  const session = await getServerSession(authOptions)
 
-    if (!session || !session.user.token) return null
-
-  const dentist = getDentists(session.user.token);
+  const dentist = getDentists();
 
   return (
     <main className="text-center p-5">
