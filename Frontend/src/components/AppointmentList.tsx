@@ -10,7 +10,7 @@ export default async function AppointmentList({
       {appointmentJsonReady.data.map((appointmentItem) => (
         <div
           className="bg-slate-400 rounded-lg mx-5 my-2 px-10 py-5 text-black space-y-5"
-          key={appointmentItem.user}
+          key={appointmentItem._id}
         >
           <div className="text-2xl text">{appointmentItem.userName}</div>
           <div className="text-xl">Dentist: {appointmentItem.dentist.name}</div>

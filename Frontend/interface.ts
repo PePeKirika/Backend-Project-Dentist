@@ -14,10 +14,11 @@ interface DentistJson {
 }
 
 interface AppointmentItem {
+  _id: string;
   appDate: Date;
   user: string;
   userName: string;
-  dentist: DentistItem[];
+  dentist: DentistItem;
   createAt: string;
 }
 

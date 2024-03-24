@@ -6,8 +6,6 @@ import getUserProfile from "@/libs/getUserProfile";
 import { useState } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/redux/store";
-import { addAppointment } from "@/redux/features/appointmentSlice";
 
 export default async function MyAccount() {
     const session = await getServerSession(authOptions)

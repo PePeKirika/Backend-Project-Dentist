@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Card from "./Card"
 
-export default async function HospitalCatalog({dentistsJson} : {dentistsJson: Promise<DentistJson>}) {
+export default async function DentistCatalog({dentistsJson} : {dentistsJson: Promise<DentistJson>}) {
 
     const dentistsJsonReady = await dentistsJson
 

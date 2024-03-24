@@ -8,8 +8,6 @@ import getUserProfile from "@/libs/getUserProfile";
 import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import dayjs, { Dayjs } from "dayjs";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/redux/store";
 import { useSession } from "next-auth/react";
 import addAppointment from "@/libs/addAppointment";
 

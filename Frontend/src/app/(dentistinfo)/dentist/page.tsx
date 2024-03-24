@@ -1,4 +1,4 @@
-import HospitalCatalog from "@/components/HospitalCatalog";
+import DentistCatalog from "@/components/DentistCatalog";
 import { Suspense } from "react";
 import { LinearProgress } from "@mui/material";
 import getDentists from "@/libs/getDentists";
@@ -10,13 +10,13 @@ export default async function Dentist() {
 
     if (!session || !session.user.token) return null
 
-  const hospital = getDentists(session.user.token);
+  const dentist = getDentists(session.user.token);
 
   return (
     <main className="text-center p-5">
         <h1 className="text-xl font-medium text-black">Select Dentist</h1>
         <Suspense fallback={ <p>Loading ... <LinearProgress/></p>}>
-          <HospitalCatalog dentistsJson={hospital} />
+          <DentistCatalog dentistsJson={dentist} />
         </Suspense>
     </main>
   );

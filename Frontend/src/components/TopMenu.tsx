@@ -14,28 +14,34 @@ export default async function TopMenu() {
     <div className="h-[64px] top-0 left-0 right-0 z-30 fixed flex flex-row
     border-y-gray-300 bg-black shadow-lg text-[20px] font-sans"
     style={{ backgroundColor: 'rgb(65, 201, 226)' }}>
-        <Link href=".">
-          <Image src={'/img/logo.png'} className="h-[100%] w-auto p-1" alt='logo' width={0} height={0} sizes='100vh'/>
+        <Link href="." className='mr-5'>
+          <Image src={'/img/logo.png'} className="h-[100%] w-auto p-1" alt='logo' width={0} height={0} sizes='100vh' />
         </Link>
-        <TopMenuItem title='Appointment' pageRef='/appointment'/>
-        <div className='flex flex-row-reverse absolute right-0 h-full ml-5 space-x-5'>
+        <Link href="/myappointment" className='w-fit my-auto px-2 text-white'>
+            My Appointment
+        </Link>
+        <div className='flex flex-row-reverse absolute right-0 h-full mr-5 space-x-5'>
         {
           session ? <div className='flex flex-row-reverse space-x-5'>
               <Link href="/api/auth/signout" className='my-auto'>
-            <div className="px-2 text-white">Sign-Out of {profile.data.name}</div>
-          </Link> 
-          <Link href="/myaccount" className='my-auto'>
-            <div className="px-2 text-white">My Account</div>
-          </Link> 
-            </div>
-          : <Link href="/api/auth/signin" className='my-auto'>
-            <div className="px-2 text-white">Sign-in</div>
-          </Link>
+               <div className="px-2 text-white">Sign-Out of {profile.data.name}</div>
+              </Link> 
+              <Link href="/myaccount" className='my-auto'>
+                <div className="px-2 text-white">My Account</div>
+              </Link> 
+              </div>
+          : <div className='flex flex-row-reverse space-x-5'>
+            <Link href="/api/auth/signin" className='my-auto'>
+              <div className="px-2 text-white">Sign-in</div>
+            </Link>
+            <Link href="/api/auth/register" className='my-auto'>
+              <div className="px-2 text-white">Register</div>
+            </Link>
+          </div>
         }
-        <Link href="/myappointment" className='w-fit my-auto px-2 text-white'>
-            My Appointment
-          </Link>
+        
         </div>
+        
         
     </div>
   )
