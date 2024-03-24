@@ -11,7 +11,7 @@ const swaggerJSDoc = require('swagger-jsdoc');
 //Re-route into other resource routers
 router.use('/:dentistId/appointments/' , AppointmentRounter) ;
 
-router.route('/').get(protect , authorize('user','admin') ,getDentists).post(protect , authorize('admin'), createDentist) ;
-router.route('/:id').get( protect , authorize('user','admin') , getDentist).put(protect , authorize('admin'), updateDentist).delete(protect, authorize('admin') ,deleteDentist);
+router.route('/').get(getDentists).post(protect , authorize('admin'), createDentist) ;
+router.route('/:id').get(getDentist).put(protect , authorize('admin'), updateDentist).delete(protect, authorize('admin') ,deleteDentist);
 
 module.exports=router ;
