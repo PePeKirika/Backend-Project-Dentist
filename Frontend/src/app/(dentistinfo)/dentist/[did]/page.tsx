@@ -12,12 +12,6 @@ export default async function DentistDetailPage({
 
   const dentistDetail = await getDentist(params.did);
 
-  // mock
-  // const mockHospital = new Map()
-  // mockHospital.set("001", {name:'Chulalongkorn Hospital', image:'/img/chula.jpg'})
-  // mockHospital.set("002", {name:'Rajavithi Hospital', image:'/img/rajavithi.jpg'})
-  // mockHospital.set("003", {name:'Thammasat University Hospital', image:'/img/thammasat.jpg'})
-
   return (
     <main className="text-center p-5">
       <h1 className="text-lg font-medium"></h1>
@@ -39,7 +33,7 @@ export default async function DentistDetailPage({
           <div className=" mx-5 ">
             Area Of Expertise: {dentistDetail.data.areaOfExpertise}{" "}
           </div>
-          <Link href={`/appointment?dentistid=${dentistDetail.data.id}&dentistname=${dentistDetail.data.name}`}>
+          <Link href={`/makeappointment?dentistid=${dentistDetail.data.id}&dentistname=${dentistDetail.data.name}`}>
             <button className="rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 shadow-sm text-white h-fit mb-0"> Select</button>
           </Link>
         </div>
@@ -47,7 +41,3 @@ export default async function DentistDetailPage({
     </main>
   );
 }
-
-// export async function generateStaticParams() {
-//     return [{hid:'001'},{hid:'002'},{hid:'003'}]
-// }

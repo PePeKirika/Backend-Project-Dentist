@@ -17,7 +17,7 @@ export default async function TopMenu() {
         <Link href="." className='mr-5'>
           <Image src={'/img/logo.png'} className="h-[100%] w-auto p-1" alt='logo' width={0} height={0} sizes='100vh' />
         </Link>
-        <Link href="/myappointment" className='w-fit my-auto px-2 text-white'>
+        <Link href="/appointment" className='w-fit my-auto px-2 text-white'>
             My Appointment
         </Link>
         <div className='flex flex-row-reverse absolute right-0 h-full mr-5 space-x-5'>
