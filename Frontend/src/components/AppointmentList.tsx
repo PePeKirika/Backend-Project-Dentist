@@ -8,11 +8,11 @@ export default async function AppointmentList({
   const appointmentJsonReady = await appointmentJson;
 
   return (
-    <div className="w-fit mx-auto py-10 px-16 rounded-lg" style={{ backgroundColor: 'rgb(247, 238, 221)' }}>
+    <div className="w-fit mx-auto py-10 px-16 rounded-xl" style={{ backgroundColor: 'rgb(247, 238, 221)' }}>
       {appointmentJsonReady.data.map((appointmentItem) => (
         <Link href={`/appointment/${appointmentItem._id}`} className="" key={appointmentItem._id}>
           <div
-            className="bg-slate-200 font-mono w-[40vw] font-bold rounded-lg my-2 px-10 py-10 text-black space-y-5 text-center hover:bg-slate-300 relative"
+            className="bg-slate-200 font-mono w-[40vw] font-bold rounded-xl my-2 px-10 py-10 text-black space-y-5 text-center hover:bg-slate-300 relative"
             key={appointmentItem._id}
           >
             <div className="text-4xl text-slate-800 mt-5">

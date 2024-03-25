@@ -36,13 +36,16 @@ export default function AppointmentDetailPage({
     router.push("/appointment");
   };
 
-  if (!appointmentDetail) return null;
+  if (!appointmentDetail) return (<div>
+      <p className="mt-20 mb-5 text-black text-center text-5xl text-bold space-y-6">Loading... </p>
+      <div className=" mb-20 "><LinearProgress/></div>
+    </div>);
 
   return (
     <main className="text-center mt-20 mb-20">
-      <Suspense fallback={ <p>Loading ... <LinearProgress/></p>}>
         <div
-          className="bg-slate-200 font-mono font-semibold w-fit rounded-lg mx-auto my-2 px-14 py-5 text-black space-y-14"
+          className=" font-mono font-semibold w-fit rounded-lg mx-auto 
+          my-2 px-14 py-5 text-black space-y-14" style={{ backgroundColor: 'rgb(247, 238, 221)' }}
           key={appointmentDetail.data._id}>
           <div className="text-5xl mt-4">Patient : {appointmentDetail.data.userName}</div>
           <div className="text-3xl text-slate-700">
@@ -70,7 +73,6 @@ export default function AppointmentDetailPage({
             </button>
             </div>
           </div>
-      </Suspense>
     </main>
   );
 }

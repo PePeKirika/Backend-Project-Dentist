@@ -1,67 +1,61 @@
-'use client'
-import { TextField } from "@mui/material";
+'use client';
+import { TextField, Button } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import userRegister  from "@/libs/userRegister";
+import userRegister from "@/libs/userRegister";
 
 export default function Booking() {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [tel, setTel] = useState("");
 
-    const [name, setName] = useState<string>("")
-    const [email, setEmail] = useState<string>("")
-    const [password, setPassword] = useState<string>("")
-    const [tel, setTel] = useState<string>("")
-
-    const router = useRouter()
+    const router = useRouter();
 
     const register = async () => {
         if (!name || !email || !password || !tel) {
-            alert("Please fill in all the fields")
-            return
+            alert("Please fill in all the fields");
+            return;
         }
-       
-       try {
-        const newUser = await userRegister(name, email, password, tel)
-        if (newUser) {
-            router.push("/api/auth/signin")
-        } else {
-            alert("Failed to register")
+
+        try {
+            const newUser = await userRegister(name, email, password, tel);
+            if (newUser) {
+                router.push("/api/auth/signin");
+            } else {
+                alert("Failed to register");
+            }
+        } catch (error) {
+            alert("Failed to register");
         }
-       } catch (error) {
-            alert("Failed to register")
-       }
-    }
+    };
 
     return (
-        <main className="justify-center flex flex-row items-center p-5">
-            <div className="w-fit  items-center justify-center m space-y-4 m-10 "
-            style={{backgroundColor: 'rgb(247, 238, 221)' }}>
-                    <div className="text-xl font-medium text-black">Vaccine Booking</div>   
+        <main className="flex justify-center items-center p-5">
+            <div className="w-fit items-center justify-center rounded-lg px-20 py-16 space-y-6 m-10"
+                style={{ backgroundColor: 'rgb(247, 238, 221)' }}>
+                <div className="text-5xl font-medium text-black text-center rounded-lg p-5 mb-10 shadow-lg"
+                    style={{ backgroundColor: 'rgb(172, 226, 225)' }}>Register</div>
 
-                    
+                <div className="w-fit space-y-2">
+                    {[
+                        { label: "Name", value: name, onChange: setName },
+                        { label: "Email", value: email, onChange: setEmail },
+                        { label: "Password", value: password, onChange: setPassword },
+                        { label: "Telephone Number", value: tel, onChange: setTel }
+                    ].map((field, index) => (
+                        <div key={index}>
+                            <div className="text-2xl text-left my-4 text-black">{`Enter your ${field.label}`}</div>
+                            <div className="w-[100%] rounded-lg space-x-5 space-y-2 px-10 py-5 text-black font-semibold shadow-lg"
+                                style={{ backgroundColor: 'rgb(241, 250, 218)' }}>
+                                <TextField className="text-2xl" fullWidth name={field.label} label={field.label} variant="standard"
+                                    value={field.value} onChange={(e) => field.onChange(e.target.value)} />
+                            </div>  
+                        </div>
+                    ))}
+                </div>
 
-                    <div className="w-fit space-y-2">
-                    <div className="text-md text-left text-gray-200">Enter your Name</div>
-                    <div className="w-[100%] bg-slate-400 rounded-lg space-x-5 space-y-2 px-10 py-5 text-black">
-                        <TextField fullWidth name="Name" label="Name" variant="standard" value={name} onChange={(e)=>{setName(e.target.value)}}/>
-                    </div>
-
-                    <div className="text-md text-left text-gray-200">Enter your Email</div>
-                    <div className="w-[100%] bg-slate-400 rounded-lg space-x-5 space-y-2 px-10 py-5 text-black">
-                        <TextField fullWidth name="Email" label="Email" variant="standard" value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
-                    </div>
-
-                    <div className="text-md text-left text-gray-200">Set your Password</div>
-                    <div className="w-[100%] bg-slate-400 rounded-lg space-x-5 space-y-2 px-10 py-5 text-black">
-                        <TextField fullWidth name="Password" label="Password" variant="standard" value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
-                    </div>
-                    
-                    <div className="text-md text-left text-gray-200">Enter your Telephone Number</div>
-                    <div className="w-[100%] bg-slate-400 rounded-lg space-x-5 space-y-2 px-10 py-5 text-black">
-                        <TextField fullWidth name="Tel" label="Tel" variant="standard" value={tel} onChange={(e)=>{setTel(e.target.value)}}/>
-                    </div>
-                    </div>
-
-                    <button className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 shadow-sm" name="Book Vaccine"
+                    <button className="block bg-blue-500 rounded-lg hover:bg-blue-400 text-white font-semibold px-5 py-3 shadow-lg text-white mt-10 mx-auto text-2xl" name="Book Vaccine"
                     onClick={register}>Register</button>
             </div>
         </main>

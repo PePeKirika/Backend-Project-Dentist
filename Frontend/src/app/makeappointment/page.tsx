@@ -6,6 +6,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import dayjs, { Dayjs } from "dayjs";
 import { useSession } from "next-auth/react";
 import addAppointment from "@/libs/addAppointment";
+import { LinearProgress } from "@mui/material";
 
 export default function AppointmentMaking() {
   const { data: session } = useSession();
@@ -20,22 +21,6 @@ export default function AppointmentMaking() {
   const [dentist, setDentist] = useState<string | null>(searchParams.get("dentistname"));
 
   let appDate = dayjs(appointmentDate).format("YYYY/MM/DD");
-
-
-
-  // dentistID = searchParams.get("dentistid");
-  // dentist = searchParams.get("dentistname");
-
-  // if (!dentistID || !dentist) return (
-  //   <main className="w-[100%] flex flex-col items-center space-y-4 mt-20 mb-20">
-  //     <Link href="/dentist">
-  //       <button className="block rounded-md bg-[#008DDA] hover:bg-indigo-500 px-5 py-4 shadow-sm text-xl text-bold"
-  //           name="Please Select Your Dentist">
-  //         Please Select Your Dentist
-  //       </button>
-  //     </Link>
-  //   </main>
-  // );
 
   const makingAppointment = async () => {
     if (!dentistID || !appDate) return alert("Please enter all fields");
@@ -53,7 +38,8 @@ export default function AppointmentMaking() {
 
   return (
     <main className="w-[100%] text-center items-center space-y-5 mt-20 mb-20" >
-      <div className="bg-slate-200 font-mono font-semibold w-fit rounded-lg mx-auto my-2 px-14 py-5 text-black space-y-14 justify-center items-center">
+      <div className=" font-mono font-semibold w-fit rounded-lg mx-auto my-2 
+      px-14 py-5 text-black space-y-14 justify-center items-center" style={{ backgroundColor: 'rgb(247, 238, 221)' }}>
         <div className="text-5xl mt-4" >
           Dentist Appointment
         </div>

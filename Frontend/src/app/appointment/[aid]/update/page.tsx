@@ -13,6 +13,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import getDentists from "@/libs/getDentists";
 import updateAppointment from "@/libs/updateAppointment";
 import DateReserve from "@/components/DateReserve";
+import { LinearProgress } from "@mui/material";
 
 export default function AppointmentDetailPage({
   params,
@@ -52,7 +53,10 @@ export default function AppointmentDetailPage({
         router.push(`/appointment/${appointmentDetail.data._id}`);
       }
 
-  if (!appointmentDetail) return null;
+  if (!appointmentDetail) return (<div>
+    <p className="mt-20 mb-5 text-black text-center text-5xl text-bold space-y-6">Loading... </p>
+    <div className=" mb-20 "><LinearProgress/></div>
+  </div>);
 
   return (
     <main className="text-center mt-20 mb-20">
