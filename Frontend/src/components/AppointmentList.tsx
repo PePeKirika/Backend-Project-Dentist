@@ -1,5 +1,4 @@
 import Link from "next/link";
-import CancelAppointment from "./CancelAppointment";
 
 export default async function AppointmentList({
   appointmentJson,
