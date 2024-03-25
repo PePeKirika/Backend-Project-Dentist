@@ -4,6 +4,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import getUserProfile from '@/libs/getUserProfile'
 import Link from 'next/link'
+import { Button } from '@mui/material'
 
 export default async function TopMenu() {
 
@@ -11,9 +12,31 @@ export default async function TopMenu() {
   const profile = session ? await getUserProfile(session.user.token) : null
 
   return (
-    <div className="h-[64px] top-0 left-0 right-0 z-30 fixed flex flex-row
-    border-y-gray-300 bg-black shadow-lg text-[20px] font-sans"
+    <div className="h-[64px] top-0 left-0 right-0 z-30 px-10 fixed flex flex-row justify-between items-center shadow-lg "
     style={{ backgroundColor: 'rgb(65, 201, 226)' }}>
+
+      <div>
+        <a href="/">
+        <img src={'/img/logo.png'} alt='logo' className="h-[28px] mx-2.5 my-4"  />
+        </a>
+        </div>
+
+      <div className="flex items-center gap-4">
+        <TopMenuItem title='appointment' pageRef='/appointment'/>
+        <TopMenuItem title='Booking' pageRef='/makeappointment'/>
+        <TopMenuItem title='myaccount' pageRef='/myaccount'></TopMenuItem>
+
+      </div>
+      
+      <div>
+        <Button className='group flex items-center gap-2 rounded-2xl hover:text-primary-default hover:bg-cyan-500 py-2 outline-none text-high'>
+          <img src={'/img/profilelogo.png'} alt="logoprofile" className="w-8 h-8 group-hover:border group-hover:border-primary-default 
+          group-hover:shadow-primary rounded-full object-cover border-default shadow-default" />
+          <p className='text-white'>Profile</p>
+        </Button>
+      </div>
+
+{/*       
         <Link href="." className='mr-5'>
           <Image src={'/img/logo.png'} className="h-[100%] w-auto p-1" alt='logo' width={0} height={0} sizes='100vh' />
         </Link>
@@ -41,7 +64,7 @@ export default async function TopMenu() {
         }
         
         </div>
-        
+         */}
         
     </div>
   )
