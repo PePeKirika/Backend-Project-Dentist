@@ -1,8 +1,9 @@
 'use client'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
+import getUserProfile from '@/libs/getUserProfile'
 
 export default function Banner() {
 //   const covers =['/img/cover.jpg','/img/cover2.jpg','/img/cover3.jpg','/img/cover4.jpg']
@@ -10,38 +11,44 @@ export default function Banner() {
 
   const router = useRouter()
 
-  const { data: session } = useSession()
-  console.log(session?.user?.email)
+  
+  const { data: session } = useSession();
+
+  const token = session?.user.token;
+
+  const [me , setMe] = useState<any>(null)
+
+  useEffect( ()=>{
+    const fetchMe = async ()=>{
+        if (!token) return null
+        const profile = await getUserProfile(token)
+        setMe(profile)
+    }
+    fetchMe()
+  },[])
+
   
   return (
-    <div className="p-5 m-0 w-screen h-[80vh] relative flex flex-row items-center justify-center"
+    <div className="block p-5 m-0 w-screen h-[80vh] relative flex flex-row items-center justify-center"
     style={{ backgroundColor: 'rgb(247, 238, 221)' }}>
-        <div className="text-black text-left max-w-md mx-20 z-20 font-mono">
-            <h1 className='text-5xl font-bold text-amber-500'>Vaccine Service Center</h1>
+        
+        <div className="text-black text-left max-w-md rounded-lg p-10 mx-20 z-20 font-mono" style={{ backgroundColor: 'rgb(247, 238, 221)' }}>
+            <h1 className='text-5xl font-bold text-amber-500'>CUD Dentist Clinic</h1>
             <h3 className='text-2xl font-sans my-5'>
-                Empower your immunity, safeguard your loved ones. Our vaccine service delivers peace of mind, one dose at a time. 
+                If there's a hole, there's a way. 
             </h3>
             {
-                session && <div className='font-semibold text-cyan-800 text-xl'>Welcome {session.user?.name}</div>
+                session && me? <div className='font-semibold text-cyan-800 text-xl'>Welcome {me.data.name}</div> : null
             }
-            <button className='bg-blue-500 text-white font-semibold py-2 px-2 my-8 rounded hover:bg-blue-400   hover:text-blue-500'
+            <button className='bg-blue-500 text-white text-2xl font-semibold py-2 px-2 my-8 rounded hover:bg-blue-400   hover:text-blue-500'
                 onClick={(e)=>{e.stopPropagation(); router.push('/dentist');}}>
-                Booking Now
+                Select Your Dentist
             </button>   
         </div>
 
         <div className='flex-grow'>
-            <Image src='/img/cover2.jpg'  alt='cover' width={1000} height={1000}/>
+            <Image src='/img/cover1.jpg'  alt='cover' fill={true}  priority={true}  className='object-cover w-[100%] h-[100%]' />
         </div>
-        {/* <div className="flex-grow">
-            <Image src='/img/cover.jpg' 
-            alt='cover'
-            fill = {true}
-            
-            priority={true}
-            className='max-w-full'
-            />
-        </div> */}
     </div>
   )
 }

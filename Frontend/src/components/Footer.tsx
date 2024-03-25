@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Footer() {
   return (
-    <footer className="text-black py-8" style={{ backgroundColor: 'rgb(172, 226, 225)' }}>
+    <footer className="text-black py-8 " style={{ backgroundColor: 'rgb(172, 226, 225)' }}>
       <div className="container mx-auto flex flex-wrap justify-between font-sans">
         <div className="w-full md:w-1/3 mb-8 md:mb-0">
           <h3 className="text-lg font-bold mb-4">About Us</h3>

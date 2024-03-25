@@ -11,9 +11,12 @@ export default async function Dentist() {
 
   return (
     <main className="text-center p-5">
-        <h1 className="text-xl font-medium text-black">Select Dentist</h1>
-        <Suspense fallback={ <p>Loading ... <LinearProgress/></p>}>
+        <h1 className="text-5xl font-medium w-fit  text-black bg rounded-lg 
+        m-12 py-6 px-10 mx-auto bg-bule-300 shadow-lg" style={{ backgroundColor: 'rgb(154, 208, 194)' }}>Select Dentist</h1>
+        <Suspense fallback={ <p>Loading ... <LinearProgress/></p> }>
+         
           <DentistCatalog dentistsJson={dentist} />
+          
         </Suspense>
     </main>
   );

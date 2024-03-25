@@ -1,10 +1,6 @@
 "use client";
 import DateReserve from "@/components/DateReserve";
 import Link from "next/link";
-import { TextField } from "@mui/material";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import getUserProfile from "@/libs/getUserProfile";
 import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import dayjs, { Dayjs } from "dayjs";
@@ -13,21 +9,36 @@ import addAppointment from "@/libs/addAppointment";
 
 export default function AppointmentMaking() {
   const { data: session } = useSession();
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   const token = session?.user.token;
   if (!token) return null;
 
   const [appointmentDate, setAppointmentDate] = useState<Dayjs | null>(null);
+  const [dentistID, setDentistID] = useState<string | null>(searchParams.get("dentistid"));
+  const [dentist, setDentist] = useState<string | null>(searchParams.get("dentistname"));
 
   let appDate = dayjs(appointmentDate).format("YYYY/MM/DD");
 
-  const searchParams = useSearchParams();
 
-  const dentistID = searchParams.get("dentistid");
-  const dentist = searchParams.get("dentistname");
-  if (!dentistID || !dentist) return null;
+
+  // dentistID = searchParams.get("dentistid");
+  // dentist = searchParams.get("dentistname");
+
+  // if (!dentistID || !dentist) return (
+  //   <main className="w-[100%] flex flex-col items-center space-y-4 mt-20 mb-20">
+  //     <Link href="/dentist">
+  //       <button className="block rounded-md bg-[#008DDA] hover:bg-indigo-500 px-5 py-4 shadow-sm text-xl text-bold"
+  //           name="Please Select Your Dentist">
+  //         Please Select Your Dentist
+  //       </button>
+  //     </Link>
+  //   </main>
+  // );
 
   const makingAppointment = async () => {
+    if (!dentistID || !appDate) return alert("Please enter all fields");
     const appointment = await addAppointment(
       dentistID,
       appDate,
@@ -41,30 +52,28 @@ export default function AppointmentMaking() {
   };
 
   return (
-    <main className="w-[100%] flex flex-col items-center space-y-4 mt-20 mb-20">
-      <div className="text-[36px] font-medium text-[#008DDA] mb-10 mt-10">
-        Vaccine Appointment
-      </div>
-
-      <div className="w-fit space-y-2 text-[#008DDA] text-lg font-bold text-center">
-        <div className="text-[28px] font-medium text-[#008DDA] mb-10">
-          Dentist : {dentist}
+    <main className="w-[100%] text-center items-center space-y-5 mt-20 mb-20" >
+      <div className="bg-slate-200 font-mono font-semibold w-fit rounded-lg mx-auto my-2 px-14 py-5 text-black space-y-14 justify-center items-center">
+        <div className="text-5xl mt-4" >
+          Dentist Appointment
         </div>
-        <div className="text-md mx-auto">Choose your Appointment date</div>
-        <DateReserve
-          onDateChange={(value: Dayjs) => {
-            setAppointmentDate(value);
-          }}
-        />
-      </div>
 
-      <button
-        className="block rounded-md bg-[#008DDA] hover:bg-indigo-500 px-5 py-4 shadow-sm text-xl text-bold"
-        name="Book Dentist"
-        onClick={makingAppointment}
-      >
-        Book Dentist
-      </button>
+          <DateReserve
+            onDateChange={(value: Dayjs) => {
+              setAppointmentDate(value);
+            }} currentDentist= {dentistID}
+            currentDate={appointmentDate}
+            onDentistChange={(value: string) => {setDentistID(value)}}
+          />
+            
+        <button
+          className="block rounded-md bg-[#008DDA] hover:bg-indigo-500 px-5 py-4 shadow-sm text-xl text-bold mb-10 mt-3 text-white mx-auto"
+          name="Make Appointment"
+          onClick={makingAppointment}
+        >
+          Make Appointment
+        </button>
+      </div>
     </main>
   );
 }

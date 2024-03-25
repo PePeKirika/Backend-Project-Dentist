@@ -12,6 +12,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import getDentists from "@/libs/getDentists";
 import updateAppointment from "@/libs/updateAppointment";
+import DateReserve from "@/components/DateReserve";
 
 export default function AppointmentDetailPage({
   params,
@@ -54,36 +55,24 @@ export default function AppointmentDetailPage({
   if (!appointmentDetail) return null;
 
   return (
-    <main className="text-center p-5">
+    <main className="text-center mt-20 mb-20">
       <div
-          className="bg-slate-400 rounded-lg mx-5 my-2 px-10 py-5 text-black space-y-5"
+          className="bg-slate-200 font-mono font-semibold w-fit rounded-lg mx-auto my-2 px-10 py-5 text-black space-y-8 justify-center items-center"
           key={appointmentDetail.data._id}
         >
-          <div className="text-2xl text">{appointmentDetail.data.userName}</div>
-          <div className="text-xl">Dentist: 
-            <Select variant="standard" name="dentist" id="dentist" value={dentist} className="h2-[2em] w-[200px]" onChange={(e) => {setDentist(e.target.value)}}>
-                {allDentist.data.map((dentistItem:DentistItem) => {
-                  return <MenuItem value={dentistItem._id}>{dentistItem.name}</MenuItem>
-                })}
-            </Select>
-          </div>
-          <div className="text-md mx-auto">Choose your Appointment date</div>
-          <div className="rounded-lg space-x-5 space-y-2 w-[100%] px-10 py-5 flex flex-row justify-center">
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-                className=""
-                value={appointmentDate}
-                onChange={(value) => {
-                  setAppointmentDate(value);
-                }}
-              />
-            </LocalizationProvider>
-          </div>
-          <button className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 shadow-sm text-white"
-            name="Edit Appointment" onClick={editAppointment}>
-            Edit Appointment
+          <div className="text-5xl mt-4">Patient : {appointmentDetail.data.userName}</div>
+          <DateReserve
+            onDateChange={(value: Dayjs) => {
+              setAppointmentDate(value);
+            }} currentDentist= {dentist}
+            currentDate={appointmentDate}
+            onDentistChange={(value: string) => {setDentist(value)}}
+          />
+          <button className="block bg-blue-500 rounded-lg hover:bg-blue-400 text-white font-semibold px-5 py-3 shadow-sm text-white mx-auto text-2xl"
+            name="Submit Changes" onClick={editAppointment}>
+            Submit Changes
           </button>
         </div>
     </main>
-  );
+    )
 }

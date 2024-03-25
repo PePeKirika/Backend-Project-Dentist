@@ -24,18 +24,24 @@ export default async function DentistDetailPage({
           sizes="100vm"
           className="rounded-lg w-[30%]"
         />
-        <div className="text-md mx-5 text-left text-black">
+        <div className="text-xl mx-5 text-left text-black space-y-5 bg-slate-100 rounded-lg w-full p-5">
           {" "}
-          {dentistDetail.data.name}
-          <div className=" mx-5 ">
-            Year Of Experiences: {dentistDetail.data.yearsOfExperience}{" "}
+          <div className="flex space-x-5">
+            <div className="text-3xl font-bold">
+              Doctor {dentistDetail.data.name}</div>
+            <Link href={`/makeappointment?dentistid=${dentistDetail.data.id}&dentistname=$<div>{dentistDetail.data.name}</div>`}>
+              <button className="bg-blue-500 rounded-lg hover:bg-blue-400 text-white font-semibold py-2 
+              px-3"> Select</button>
+            </Link>
           </div>
-          <div className=" mx-5 ">
-            Area Of Expertise: {dentistDetail.data.areaOfExpertise}{" "}
+          <div className="bg-slate-200 h-[85%] rounded-lg pl-2 py-5 space-y-5">
+            <div className=" mx-5">
+              Year Of Experiences: {dentistDetail.data.yearsOfExperience}{" "}
+            </div>
+            <div className=" mx-5 ">
+              Area Of Expertise: {dentistDetail.data.areaOfExpertise}{" "}
+            </div>
           </div>
-          <Link href={`/makeappointment?dentistid=${dentistDetail.data.id}&dentistname=${dentistDetail.data.name}`}>
-            <button className="rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 shadow-sm text-white h-fit mb-0"> Select</button>
-          </Link>
         </div>
       </div>
     </main>

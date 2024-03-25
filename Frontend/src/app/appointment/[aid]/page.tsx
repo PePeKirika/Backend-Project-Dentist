@@ -1,4 +1,4 @@
-"use client";
+  "use client";
 import getAppointment from "@/libs/getAppointment";
 import deleteAppointment from "@/libs/deleteAppointment";
 import Link from "next/link";
@@ -6,6 +6,8 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useState } from "react";
+import { LinearProgress } from "@mui/material";
+import { Suspense } from "react";
 
 export default function AppointmentDetailPage({
   params,
@@ -37,37 +39,38 @@ export default function AppointmentDetailPage({
   if (!appointmentDetail) return null;
 
   return (
-    <main className="text-center py-5">
-      <div
-        className="bg-slate-200 font-mono font-semibold w-[512px] rounded-lg mx-auto my-2 px-10 py-5 text-black space-y-8"
-        key={appointmentDetail.data._id}
-      >
-        <div className="text-2xl">{appointmentDetail.data.userName}</div>
-        <div className="text-xl text-slate-700">
-          Dentist : Doctor {appointmentDetail.data.dentist.name}
-        </div>
-        <div className="text-xl text-slate-700">
-          Appointment Date :{" "}
-          {new Date(appointmentDetail.data.appDate).toLocaleDateString()}
-        </div>
-        <div className="space-x-10">
-          <Link href={`/appointment/${appointmentDetail.data._id}/update`}>
+    <main className="text-center mt-20 mb-20">
+      <Suspense fallback={ <p>Loading ... <LinearProgress/></p>}>
+        <div
+          className="bg-slate-200 font-mono font-semibold w-fit rounded-lg mx-auto my-2 px-14 py-5 text-black space-y-14"
+          key={appointmentDetail.data._id}>
+          <div className="text-5xl mt-4">Patient : {appointmentDetail.data.userName}</div>
+          <div className="text-3xl text-slate-700">
+            Dentist : Doctor {appointmentDetail.data.dentist.name}
+          </div>
+          <div className="text-2xl text-slate-700">
+            Appointment Date :{" "}
+            {new Date(appointmentDetail.data.appDate).toLocaleDateString()}
+          </div>
+          <div className="space-x-10">
+            <Link href={`/appointment/${appointmentDetail.data._id}/update`}>
+              <button
+                className="block bg-blue-500 rounded-lg hover:bg-blue-400 text-white font-semibold px-3 py-2 shadow-sm text-white inline"
+                name="Edit Appointment"
+              >
+                Edit Appointment
+              </button>
+            </Link>
             <button
-              className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 shadow-sm text-white inline"
-              name="Edit Appointment"
+              className="block bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600  hover:text-red-200 px-3 py-2 shadow-sm text-white inline"
+              name="Cancel Appointment"
+              onClick={cancelAppointment}
             >
-              Edit Appointment
+              Cancel Appointment
             </button>
-          </Link>
-          <button
-            className="block rounded-md bg-rose-500 hover:bg-rose-700 px-3 py-2 shadow-sm text-white inline"
-            name="Cancel Appointment"
-            onClick={cancelAppointment}
-          >
-            Cancel Appointment
-          </button>
-        </div>
-      </div>
+            </div>
+          </div>
+      </Suspense>
     </main>
   );
 }

@@ -32,36 +32,38 @@ export default function Booking() {
     }
 
     return (
-        <main className="w-[100%] flex flex-col items-center space-y-4">
-           
-            <div className="text-xl font-medium">Vaccine Booking</div>   
+        <main className="justify-center flex flex-row items-center p-5">
+            <div className="w-fit  items-center justify-center m space-y-4 m-10 "
+            style={{backgroundColor: 'rgb(247, 238, 221)' }}>
+                    <div className="text-xl font-medium text-black">Vaccine Booking</div>   
 
-            
+                    
 
-            <div className="w-fit space-y-2">
-                <div className="text-md text-left text-gray-200">Enter your Name</div>
-                <div className="w-[100%] bg-slate-400 rounded-lg space-x-5 space-y-2 px-10 py-5 text-black">
-                    <TextField fullWidth name="Name" label="Name" variant="standard" value={name} onChange={(e)=>{setName(e.target.value)}}/>
-                </div>
+                    <div className="w-fit space-y-2">
+                    <div className="text-md text-left text-gray-200">Enter your Name</div>
+                    <div className="w-[100%] bg-slate-400 rounded-lg space-x-5 space-y-2 px-10 py-5 text-black">
+                        <TextField fullWidth name="Name" label="Name" variant="standard" value={name} onChange={(e)=>{setName(e.target.value)}}/>
+                    </div>
 
-                <div className="text-md text-left text-gray-200">Enter your Email</div>
-                <div className="w-[100%] bg-slate-400 rounded-lg space-x-5 space-y-2 px-10 py-5 text-black">
-                    <TextField fullWidth name="Email" label="Email" variant="standard" value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
-                </div>
+                    <div className="text-md text-left text-gray-200">Enter your Email</div>
+                    <div className="w-[100%] bg-slate-400 rounded-lg space-x-5 space-y-2 px-10 py-5 text-black">
+                        <TextField fullWidth name="Email" label="Email" variant="standard" value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
+                    </div>
 
-                <div className="text-md text-left text-gray-200">Set your Password</div>
-                <div className="w-[100%] bg-slate-400 rounded-lg space-x-5 space-y-2 px-10 py-5 text-black">
-                    <TextField fullWidth name="Password" label="Password" variant="standard" value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
-                </div>
-                
-                <div className="text-md text-left text-gray-200">Enter your Telephone Number</div>
-                <div className="w-[100%] bg-slate-400 rounded-lg space-x-5 space-y-2 px-10 py-5 text-black">
-                    <TextField fullWidth name="Tel" label="Tel" variant="standard" value={tel} onChange={(e)=>{setTel(e.target.value)}}/>
-                </div>
+                    <div className="text-md text-left text-gray-200">Set your Password</div>
+                    <div className="w-[100%] bg-slate-400 rounded-lg space-x-5 space-y-2 px-10 py-5 text-black">
+                        <TextField fullWidth name="Password" label="Password" variant="standard" value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
+                    </div>
+                    
+                    <div className="text-md text-left text-gray-200">Enter your Telephone Number</div>
+                    <div className="w-[100%] bg-slate-400 rounded-lg space-x-5 space-y-2 px-10 py-5 text-black">
+                        <TextField fullWidth name="Tel" label="Tel" variant="standard" value={tel} onChange={(e)=>{setTel(e.target.value)}}/>
+                    </div>
+                    </div>
+
+                    <button className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 shadow-sm" name="Book Vaccine"
+                    onClick={register}>Register</button>
             </div>
-            
-            <button className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 shadow-sm" name="Book Vaccine"
-            onClick={register}>Register</button>
         </main>
     );
 }
