@@ -1,21 +1,40 @@
+"use client";
 import getAppointment from "@/libs/getAppointment";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import CancelAppointment from "@/components/CancelAppointment";
+import deleteAppointment from "@/libs/deleteAppointment";
+import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useState } from "react";
 
-export default async function AppointmentDetailPage({
+export default function AppointmentDetailPage({
   params,
 }: {
   params: { aid: string };
 }) {
-  const session = await getServerSession(authOptions);
+  const [appointmentDetail, setAppointmentDetail] = useState<any>(null);
 
-  if (!session || !session.user.token) return null;
+  const { data: session } = useSession();
 
-  const appointmentDetail = await getAppointment(
-    params.aid,
-    session.user.token
-  );
+  const token = session?.user.token;
+  if (!token) return null;
+
+  useEffect(() => {
+    const fetchAppointment = async () => {
+      const appointment = await getAppointment(params.aid, token);
+      setAppointmentDetail(appointment);
+    };
+    fetchAppointment();
+  }, []);
+
+  const router = useRouter();
+
+  const cancelAppointment = async () => {
+    await deleteAppointment(appointmentDetail.data._id, token);
+    router.push("/appointment");
+  };
+
+  if (!appointmentDetail) return null;
 
   return (
     <main className="text-center py-5">
@@ -31,8 +50,22 @@ export default async function AppointmentDetailPage({
           Appointment Date :{" "}
           {new Date(appointmentDetail.data.appDate).toLocaleDateString()}
         </div>
-        <div className="mx-auto">
-          <CancelAppointment appointmentID={appointmentDetail.data._id} />
+        <div className="space-x-10">
+          <Link href={`/appointment/${appointmentDetail.data._id}/update`}>
+            <button
+              className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 shadow-sm text-white inline"
+              name="Edit Appointment"
+            >
+              Edit Appointment
+            </button>
+          </Link>
+          <button
+            className="block rounded-md bg-rose-500 hover:bg-rose-700 px-3 py-2 shadow-sm text-white inline"
+            name="Cancel Appointment"
+            onClick={cancelAppointment}
+          >
+            Cancel Appointment
+          </button>
         </div>
       </div>
     </main>
