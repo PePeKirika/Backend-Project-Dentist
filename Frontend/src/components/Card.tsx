@@ -27,9 +27,9 @@ export default  function Card({dentistName , imgSrc, onRating  , yearsOfExperien
                 <div className=' rounded-b-lg w-full h-[30%] text-black text-xl font-semibold py-8'
                 style={{ backgroundColor: 'rgb(220, 242, 241)' }}
                 >   
-                    {dentistName}
-                    <h3>Years of expertise : {yearsOfExperience}</h3>
-                    <h3>Area of expertise : {areaOfExpertise}</h3>
+                    Doctor {dentistName}
+                    <h3>Years of Experience : {yearsOfExperience}</h3>
+                    <h3>Area of Expertise : {areaOfExpertise}</h3>
                 </div>
                 
         </InteractiveCard>
