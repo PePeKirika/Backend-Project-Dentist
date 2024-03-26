@@ -33,10 +33,7 @@ export default function Banner() {
     style={{ backgroundColor: 'rgb(247, 238, 221)' }}>
         
         <div className="text-black text-left max-w-md rounded-lg p-10 mx-20 z-20 font-mono" style={{ backgroundColor: 'rgb(247, 238, 221)' }}>
-            <h1 className='text-5xl font-bold text-amber-500'>CUD Dentist Clinic</h1>
-            <h3 className='text-2xl font-sans my-5'>
-                If there's a hole, there's a way. 
-            </h3>
+            <h1 className='text-5xl font-bold text-amber-500 mb-10'>CUD Dentist Clinic</h1>
             {
                 session && me? <div className='font-semibold text-cyan-800 text-xl'>Welcome {me.data.name}</div> : null
             }

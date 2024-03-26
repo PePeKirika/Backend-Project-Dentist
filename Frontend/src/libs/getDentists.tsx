@@ -1,6 +1,3 @@
-
-import {resolve} from "path"
-
 export default async function getDentists() {
 
     await new Promise( (resolve)=> setTimeout(resolve, 1000))
