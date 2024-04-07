@@ -22,7 +22,7 @@ export default async function AppointmentList({
               Name: {appointmentItem.userName}
             </div>
             <div className="text-3xl text-slate-700">
-              Doctor {appointmentItem.dentist.name}
+              Doctor {appointmentItem.dentist?.name}
             </div>
             <div className="text-lg text-slate-400 font-normal">
               (click to see more infomation)

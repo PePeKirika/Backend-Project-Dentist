@@ -37,8 +37,8 @@ export default function Banner() {
             {
                 session && me? <div className='font-semibold text-cyan-800 text-xl'>Welcome {me.data.name}</div> : null
             }
-            <button className='bg-blue-500 text-white text-2xl font-semibold py-2 px-2 my-8 rounded hover:bg-blue-400   hover:text-blue-500'
-                onClick={(e)=>{e.stopPropagation(); router.push('/dentist');}}>
+            <button className='bg-blue-500 text-white text-2xl font-semibold py-2 px-2 my-8 rounded hover:bg-blue-400   
+            hover:text-blue-500' onClick={(e)=>{e.stopPropagation(); router.push('/dentist');}}>
                 Select Your Dentist
             </button>   
         </div>

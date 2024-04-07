@@ -49,7 +49,7 @@ export default function AppointmentDetailPage({
           key={appointmentDetail.data._id}>
           <div className="text-5xl mt-4">Patient : {appointmentDetail.data.userName}</div>
           <div className="text-3xl text-slate-700">
-            Dentist : Doctor {appointmentDetail.data.dentist.name}
+            Dentist : Doctor {appointmentDetail.data.dentist?.name}
           </div>
           <div className="text-2xl text-slate-700">
             Appointment Date :{" "}

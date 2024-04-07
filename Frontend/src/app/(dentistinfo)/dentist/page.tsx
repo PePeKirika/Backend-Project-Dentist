@@ -7,7 +7,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export default async function Dentist() {
 
-  const dentist = getDentists();
+  const dentist = await getDentists();
 
   return (
     <main className="text-center p-5">

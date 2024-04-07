@@ -2,6 +2,8 @@ import NextAuth from "next-auth/next";
 import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import userLogIn from "@/libs/userLogIn";
+import { signIn } from "next-auth/react";
+
 
 export const authOptions: AuthOptions = {
 
@@ -44,6 +46,8 @@ export const authOptions: AuthOptions = {
         session.user = token as any
         
         return session
+      }, async redirect({ url, baseUrl }) {
+        return `/`
       }
     }
  }
